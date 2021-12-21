@@ -5,7 +5,7 @@
 # pull official base image
 FROM node:16.5.0-alpine as builder
 
-# set working directory
+# set working director
 WORKDIR /usr/src/app
 
 # add `usr/src/app/node_modules/.bin` to $PATH
