@@ -52,7 +52,7 @@ jobs:
           name: Build docker container
           command: |
                 docker login --username ${DOCKER_USR} --password ${DOCKER_PSW}
-                docker build -t awscicd:latest .
+                  docker build -t awscicd:latest .
                 docker images ls
                 docker tag awscicd ${DOCKER_USR}/awscicd:latest
                 docker push ${DOCKER_USR}/awscicd:latest
