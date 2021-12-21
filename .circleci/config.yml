@@ -20,21 +20,7 @@ jobs:
       - save_cache:
           key: frontend-build
           paths: [node_modules]
-  lint-app:
-    docker:
-      - image: circleci/node:16.13.0
-    steps:
-      # Checkout code from git
-      - checkout
-      # Restore from cache
-      - restore_cache:
-          key: frontend-build
-      # Your job code here
-      - run:
-          name: lint app
-          command: |
-            # Your code here
-            npm run lint
+ 
   lint-docker:
     docker:
       - image: python:3.7.3-stretch
@@ -57,21 +43,7 @@ jobs:
           command: |
             . venv/bin/activate
             hadolint ./Dockerfile
-  test-app:
-    docker:
-      - image: circleci/node:16.13.0
-    steps:
-      # Checkout code from git
-      - checkout
-      # Restore from cache
-      - restore_cache:
-          key: frontend-build
-      # Your job code here
-      - run:
-          name: test frontend
-          command: |
-            # Your code here
-            npm run test:coverage
+  
   push-app:
     machine: true
     steps:
