@@ -6,7 +6,7 @@
 FROM node:16.5.0-alpine as builder
 
 # set working directory
-WORKDIR /usr/src/app
+                WORKDIR /usr/src/app
 
 # add `usr/src/app/node_modules/.bin` to $PATH
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
