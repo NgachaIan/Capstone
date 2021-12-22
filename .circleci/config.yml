@@ -8,7 +8,7 @@ orbs:
 jobs:
   build-app:
     docker:
-      - image: circleci/node:16.13.0
+      - image: python:3.7.3-stretch
     steps:
       - checkout
       - run:
@@ -85,8 +85,6 @@ jobs:
             echo "pushing image to AWS ECR..."
             docker push public.ecr.aws/g6i2u8l8/test:latest
   create-deployment:
-    docker:
-      - image: cimg/python:3.9.7 
     executor: aws-eks/python3
     parameters:
       cluster-name:
