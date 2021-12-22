@@ -59,18 +59,9 @@ jobs:
     steps:
          - checkout
          - run: |
-            echo "Pre-Build Steps:"
-            echo "authenticating with AWS ECR..."
-            aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g6i2u8l8
-            echo "Build Steps:"
-            echo "building image..."
-            docker build -t test .
-            echo "Tag Steps:"
-            echo "tagging stage"
-            docker tag test:latest public.ecr.aws/g6i2u8l8/test:latest
-            echo "Post-Build Steps:"
-            echo "pushing image to AWS ECR..."
-            docker push public.ecr.aws/g6i2u8l8/test:latest
+            docker build -t ngacha/awsci:latest .
+            echo $DOCKERHUB_PASSWORD | docker login -u $DOCKER_USER --password-stdin
+            docker push ngacha/awsci:latest
   # Creation of Cluster
   create-cluster:
     executor: aws-eks/python3
