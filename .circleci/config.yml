@@ -14,10 +14,7 @@ commands:
           command: |
             aws cloudformation delete-stack --stack-name eksctl-devopscapstone-nodegroup-nodegroup --region us-east-1
             aws cloudformation delete-stack --stack-name eksctl-<< parameters.cluster-name >>-cluster --region us-east-1
-parameters:
-  docker_image:
-    type: string
-    default: python:3.10.0-base
+
 jobs:
   build:
     docker:
