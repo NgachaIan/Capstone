@@ -129,6 +129,6 @@ workflows:
       - deploy:
           requires: [push-app]
       - create-cluster:
-          requires:
-            - deploy
+          requires: [deploy]
+            
      
