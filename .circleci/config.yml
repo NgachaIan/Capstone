@@ -12,8 +12,8 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name eksctl-devopscapstone-nodegroup-nodegroup --region us-east-2
-            aws cloudformation delete-stack --stack-name eksctl-<< parameters.cluster-name >>-cluster --region us-east-2
+            aws cloudformation delete-stack --stack-name eksctl-Capstone-nodegroup-nodegroup --region eu-west-1
+            aws cloudformation delete-stack --stack-name eksctl-<< parameters.cluster-name >>-cluster --region eu-west-1
 
 jobs:
   build:
@@ -70,7 +70,7 @@ jobs:
         description: |
           Name of the EKS cluster
         type: string
-        default: ian
+        default: boychild
     steps:
       - run:
           name: Install the eksctl tool
@@ -92,7 +92,7 @@ jobs:
       - aws-eks/install-aws-iam-authenticator:
           release-tag: ''
       - aws-eks/create-cluster:
-          cluster-name: ian
+          cluster-name: boychild
           node-type: t3.medium
      
    # Test the Cluster
@@ -131,7 +131,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployments/nginx-deployment.yaml
-          resource-name: deployments/ian
+          resource-name: deployments/boychild
       - kubernetes/create-or-update-resource:
           resource-file-path: deployments/app-service.yaml
 
@@ -154,7 +154,7 @@ jobs:
           aws-region: << parameters.aws-region >>
       - kubernetes/delete-resource:
           resource-types: "deployment,service"
-          label-selector: "app=ian"
+          label-selector: "app=boychild"
           wait: true
       - run:
           name: Check on pod status
@@ -181,7 +181,7 @@ jobs:
             $SUDO mv eksctl_download/eksctl /usr/local/bin/
             rmdir eksctl_download
       - aws-eks/delete-cluster:
-          cluster-name: ian
+          cluster-name: boychild
           aws-region: $AWS_DEFAULT_REGION
           wait: true
 
@@ -204,10 +204,10 @@ workflows:
           requires:
             - build
       - test-cluster:
-          cluster-name: ian
+          cluster-name: boychild
           requires:
             - create-cluster
       - create-deployment:
-          cluster-name: ngacha
+          cluster-name: boychild
           requires:
             - test-cluster
